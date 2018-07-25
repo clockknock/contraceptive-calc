@@ -1,10 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>计生用品计算</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <title>title</title>
+    <style>
+        .table {
+            margin-left: 20%;
+            width: 45%;
+        }
+
+        tr {
+            width: 35%;
+        }
+
+        td {
+            width: 35%;
+        }
+
+        .h1-head{
+            background-color: #44a8ed;color: #ffffff;text-align: center;
+        }
+    </style>
+    <script type="application/javascript">
+        $(function () {
+            $("#doCalc").click(function () {
+                let singlePrice = $("#singlePrice").val();
+                let doPerWeek = $("#doPerWeek").val();
+                let usePerOnce = $("#usePerOnce").val();
+
+                let costPerYear = 0;
+                if (singlePrice && doPerWeek && usePerOnce) {
+                    costPerYear = singlePrice * usePerOnce * doPerWeek * 52;
+                    $("#costPerYear").val(costPerYear.toFixed(2));
+
+                    $("#usePerYear").val(usePerOnce * doPerWeek * 52);
+                } else {
+                    alert("请将上半部分的三个选项填写完整")
+                }
+
+                let customerYear = $("#customerYear").val();
+                if (customerYear) {
+                    let useInYears = costPerYear * customerYear;
+                    $("#useInYears").val(useInYears.toFixed(2));
+                }
+            })
+        })
+    </script>
 </head>
 <body>
-	<h2>计生用品计算</h2>
+<div class="container-fluid">
+    <div class="row h1-head">
+
+        <h1 class="center-block"><span class="text">计生用品</span>一年及自定义年限的金额花费</h1>
+    </div>
+    <div class="row" style="margin-left: 20%;margin-right: 20%;margin-top: 80px;">
+
+        <h2>输入项</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>单个价格</td>
+                <td>
+                    <input type="number" id="singlePrice" placeholder="单个价格"/>
+                </td>
+            </tr>
+            <tr>
+                <td>一周几次</td>
+                <td>
+                    <input type="number" id="doPerWeek" placeholder="一周几次"/>
+                </td>
+            </tr>
+            <tr>
+                <td>一次所用个数</td>
+                <td>
+                    <input type="number" id="usePerOnce" placeholder="一次所用个数"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="btn btn-default center-block" id="doCalc" style="width: 50%;">计算</span>
+                </td>
+
+            </tr>
+            </thead>
+
+        </table>
+
+        <h2>结算结果</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>一年用几个</td>
+                <td>
+                    <input type="number" disabled="disabled" id="usePerYear" placeholder="一年用几个"/>
+                </td>
+            </tr>
+            <tr>
+                <td>每年花费</td>
+                <td>
+                    <input type="number" disabled="disabled" id="costPerYear" placeholder="每年花费"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><p class="text-success">下面填写想知道多少年里的花费</p></td>
+
+            </tr>
+            <tr>
+                <td><span><input type="number" id="customerYear" style="width: 40px;"/>年花费</span></td>
+                <td>
+                    <input type="number" disabled="disabled" id="useInYears" placeholder="这么多年花多少"/>
+                </td>
+            </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+
 </body>
 </html>
